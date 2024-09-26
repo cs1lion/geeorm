@@ -2,6 +2,7 @@ package session
 
 import (
 	"database/sql"
+	"fmt"
 	"geeorm/dialect"
 	"os"
 	"testing"
@@ -20,8 +21,10 @@ type User struct {
 }
 
 func TestMain(m *testing.M) {
+	fmt.Println("Initing test...")
 	TestDB, _ = sql.Open("sqlite3", "../gee.db")
 	code := m.Run()
+	fmt.Println("Tear down after tests")
 	_ = TestDB.Close()
 	os.Exit(code)
 }
